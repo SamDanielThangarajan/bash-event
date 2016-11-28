@@ -22,7 +22,7 @@ get_user_line() {
 }
 
 add_user() {
-  #echo this is add_user $1 $2
+#  echo this is add_user $1 $2
   if [ ! -z "$(get_user_line $1)" ]
   then
     echo ERROR_USER_EXISTS
@@ -33,7 +33,7 @@ add_user() {
 }
 
 check_exists_user() {
-  #echo this is check_exists_user $1
+#  echo this is check_exists_user $1
   if [ ! -z "$(get_user_line $1)" ]
   then
     echo OK
@@ -43,7 +43,7 @@ check_exists_user() {
 }
 
 authenticate_user() {
-  #echo this is authenticate_user $1 $2
+#  echo this is authenticate_user $1 $2
   if [ ! -z "$(get_user_line $1)" ]
   then
     passwd=$(get_field $(get_user_line $1) 1)
@@ -60,7 +60,7 @@ authenticate_user() {
 }
 
 list_users() {
-  #echo this is list_users.
+#  echo this is list_users.
   for line in $(cat $DB_FILE)
   do
     echo $(get_field $line 0)
@@ -78,7 +78,7 @@ process_req_file() {
 cmd_line=$(cat $1 | head -1)
 #cmd=$(echo $cmd_line | awk -F: '{print $1}' )
 cmd=$(get_field $cmd_line 0)
-#echo this is $cmd .
+echo this is $cmd .
 
 case "$cmd" in
 ADD_USER) reply=$(add_user $(get_field $cmd_line 1) $(get_field $cmd_line 2)) ;;
@@ -90,7 +90,7 @@ esac
 
 rep_file="$(dirname $1)/$(get_rep_name $1)"
 
-#echo "|${reply}|${rep_file}|"
+echo "|${reply}|${rep_file}|"
 echo "${reply}" > ${rep_file}
 
 $(rm $1)

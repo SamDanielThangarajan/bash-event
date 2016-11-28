@@ -9,9 +9,10 @@ function get_unique_id
       if [[ -f $UNIQUE_ID_SERVICE_DIRECTORY/response_$CHAT_CLIENT_ID ]]; then
          unique_id=`cat $UNIQUE_ID_SERVICE_DIRECTORY/response_$CHAT_CLIENT_ID` 
          rm -rf $UNIQUE_ID_SERVICE_DIRECTORY/response_$CHAT_CLIENT_ID
+         break
       fi
    done
-   return unique_id
+   return $unique_id
 }
 
 function user_login
@@ -22,20 +23,23 @@ function user_login
    read -s ul_password
    get_unique_id
    uid=$?
+   echo "request_$uid"
    echo "AUTH_USER:$ul_user_name:$ul_password" >> $REGISTRY_SERVICE_DIRECTORY/request_$uid
 
+   echo "$REGISTRY_SERVICE_DIRECTORY/reply_$uid"
    while true
    do
-      echo "Looking for user details in registry"
       if [[  -f $REGISTRY_SERVICE_DIRECTORY/reply_$uid ]]; then
          result=`cat $REGISTRY_SERVICE_DIRECTORY/reply_$uid`
          rm -rf $REGISTRY_SERVICE_DIRECTORY/reply_$uid
          if [[ $result = "OK" ]]; then
+            echo "return 0 : $result"
+            USER_NAME=${ul_user_name}
             return 0
-         else:
+         else
+            echo "return 1 : $result"
             return 1
          fi
-
       fi
    done
 }
@@ -49,10 +53,11 @@ function send_message_to
    get_unique_id
    local uniq_id=$?.chatsrv
 
-   cat >${MESSAGING_SERVICE_DIRECTORY}/request_${uniq_id} <<EOF
-${USER_NAME}
-${1}
-${2}
+   cat >${MESSAGING_SERVICE_DIRECTORY}/${uniq_id}-send <<EOF
+Title:title
+FROM:${USER_NAME}
+TO:${1}
+MSG:${2}
 EOF
 
 }
@@ -62,7 +67,7 @@ function read_message_from
    count=1
    while :
    do
-      for file in `ls -tr1 ${MAIL_BOX_DIRECTORY}/${USER_NAME}/${1}_* 2>/dev/null`
+      for file in `ls -tr1 ${MAIL_BOX_DIRECTORY}/${USER_NAME}/${1}-* 2>/dev/null`
       do
          cat $file | sed "s/^/$1:/"
          cat $file | sed "s/^/$1:/" >> ${USER_NAME}_chatwith_${1}
