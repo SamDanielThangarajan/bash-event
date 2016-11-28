@@ -15,6 +15,8 @@ export GARBAGE_COLLECTOR_SERVICE_DIRECTORY=${SERVICE_DIRECTORIES_ROOT}/garbage_c
 export CHAT_CLIENT_DIRECTORY=${SERVICE_DIRECTORIES_ROOT}/chat_client/
 export BACKUP_SERVICE_DIRECTORY=${SERVICE_DIRECTORIES_ROOT}/backup_service/
 
+# Mail Box Directory
+export MAIL_BOX_DIRECTORY=${MESSAGING_SERVICE_DIRECTORY}/mail-box
 
 # Service Identifiers
 export UNIQUE_ID_SRVID=uniq.serv
@@ -30,6 +32,7 @@ export SERVICE_REGISTRY_SRVID=srvreg.srv
 # Service Report File
 export STATUS_REPORT_FILE=${SERVICE_DIRECTORIES_ROOT}/status.log
 touch ${STATUS_REPORT_FILE}
+
 
 #Alias for services
 alias start-back-up="${SOURCE_DIRECTORY}/back_up/backup.sh"

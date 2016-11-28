@@ -3,7 +3,7 @@
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>440</x>
+      <x>128</x>
       <y>336</y>
       <w>144</w>
       <h>192</h>
@@ -16,6 +16,7 @@ bg=green
  * LOGIN
  * LIST_USERS
 -- Msgng 
+ * CHAT
  * SEND_MESSAGE
  * READ_MESSAGE
 --- Room
@@ -28,7 +29,7 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>704</x>
+      <x>392</x>
       <y>400</y>
       <w>152</w>
       <h>72</h>
@@ -43,23 +44,24 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>712</x>
-      <y>168</y>
+      <x>400</x>
+      <y>160</y>
       <w>144</w>
-      <h>72</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Registry
 bg=green
 --
 * ADD_USER
 * CHECK_USER_EXISTS
+* AUTHENTICATE_USER
 * LIST_USERS</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
+      <x>248</x>
       <y>160</y>
       <w>168</w>
       <h>200</h>
@@ -70,7 +72,7 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>712</x>
+      <x>400</x>
       <y>624</y>
       <w>152</w>
       <h>80</h>
@@ -88,7 +90,7 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>752</x>
+      <x>440</x>
       <y>216</y>
       <w>40</w>
       <h>200</h>
@@ -99,7 +101,7 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
+      <x>248</x>
       <y>408</y>
       <w>160</w>
       <h>40</h>
@@ -110,7 +112,7 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>552</x>
+      <x>240</x>
       <y>504</y>
       <w>176</w>
       <h>152</h>
@@ -121,7 +123,7 @@ bg=green
   <element>
     <type>com.umlet.element.Actor</type>
     <coordinates>
-      <x>312</x>
+      <x>0</x>
       <y>408</y>
       <w>80</w>
       <h>96</h>
@@ -132,7 +134,7 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>344</x>
+      <x>32</x>
       <y>400</y>
       <w>112</w>
       <h>56</h>
@@ -143,7 +145,7 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>1080</x>
+      <x>768</x>
       <y>296</y>
       <w>96</w>
       <h>48</h>
@@ -157,7 +159,7 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>1080</x>
+      <x>768</x>
       <y>360</y>
       <w>128</w>
       <h>48</h>
@@ -171,7 +173,7 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>752</x>
+      <x>440</x>
       <y>448</y>
       <w>40</w>
       <h>192</h>
@@ -182,7 +184,7 @@ bg=green
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>1080</x>
+      <x>768</x>
       <y>424</y>
       <w>128</w>
       <h>48</h>
@@ -196,7 +198,7 @@ bg=green
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1056</x>
+      <x>744</x>
       <y>264</y>
       <w>200</w>
       <h>240</h>
@@ -207,7 +209,7 @@ bg=green
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>560</x>
+      <x>248</x>
       <y>232</y>
       <w>104</w>
       <h>48</h>
@@ -219,7 +221,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>808</x>
+      <x>496</x>
       <y>296</y>
       <w>104</w>
       <h>56</h>
@@ -231,7 +233,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>536</x>
+      <x>224</x>
       <y>208</y>
       <w>104</w>
       <h>56</h>
@@ -243,7 +245,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>792</x>
+      <x>480</x>
       <y>272</y>
       <w>104</w>
       <h>56</h>
@@ -255,7 +257,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>816</x>
+      <x>504</x>
       <y>520</y>
       <w>104</w>
       <h>56</h>
@@ -267,7 +269,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>792</x>
+      <x>480</x>
       <y>504</y>
       <w>104</w>
       <h>48</h>
@@ -279,7 +281,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>536</x>
+      <x>224</x>
       <y>576</y>
       <w>104</w>
       <h>56</h>
@@ -291,7 +293,7 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>552</x>
+      <x>240</x>
       <y>592</y>
       <w>104</w>
       <h>56</h>

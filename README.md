@@ -51,8 +51,8 @@ This service is used to manage users and their passwords which will be used when
 
 __List of Operations__
 1. ADD_USER
-2. CHECK_USER_EXISTS
-3. AUTHENTICATE_USER
+2. CHECK_USER_EXISTS  
+3. AUTHENTICATE_USER  
 4. LIST_USERS
 
 ###### Example Input Format:
@@ -69,12 +69,12 @@ ERROR_NO_USER
 This is the core service of this chat system. For each request this service will check the existence of each parties involved and deliver the content in the destination user's mail box.
 **${MESSAGING_SERVICE_DIRECTORY}** is defined and all messaging requests should land here. The messaging service will publish the **${MAIL_BOX_DIRECTORY}** variable which will have the mailboxes for users where they can fetch the incoming messages.
 
-__List of Operations__
+__List of Operations__  
 1. SEND_MESSAGE
 
 ###### Sample mail box file and directories :
-${MAIL_BOXS_DIRECTORY}/<username>/msg1  
-${MAIL_BOXS_DIRECTORY}/<username>/msg2  
+${MAIL_BOX_DIRECTORY}/<username>/msg1  
+${MAIL_BOX_DIRECTORY}/<username>/msg2  
 
 ###### Sample Input file Format:
 SEND MESSAGE  
@@ -86,10 +86,10 @@ MSG:
 This service adds chat room functionality. The service will monitor the directory in the variable **${ROOM_SERVICE_DIRECTORY}**.   
 This Service will create separate directories for each room and maintain a main chat file in its room directory. For every POST_MESSAGE action, the service will append the contents to the main chat message with the senders identity.
 
-__List of Operations__
+__List of Operations__  
 1. ADD_ROOM
-2. LIST_ROOM
-3. CHECK_ROOM_EXISTS
+2. LIST_ROOM  
+3. CHECK_ROOM_EXISTS  
 4. POST_MESSAGE
 
 ###### Sample File and Directories
@@ -101,31 +101,33 @@ ${ROOM_SERVICE_DIRECTORY}/rooms/KI08/main-chat-file
 
 
 ##### 1.4.3.4 Chat Client:
-This is the application that will interact with users and speak with other services in the backend. This can be a basic menu based application where users will be presented with the list of options to interact with the system. All basic operations are listed in the services design diagram.  
+This is the application that will interact with users and speak with other services in the back-end. This can be a basic menu based application where users will be presented with the list of options to interact with the system. All basic operations are listed in the services design diagram.  
 To start with chat client can have polling mechanism to retrieve the incoming messages and the chat room updates but it can be enhanced in the future.
 
-__List of Operations__
+__List of Operations__  
 --User Management
 1.  SIGN_UP
 2.  LOGIN
-3.  LIST_USERS
--- Messaging
-4.  SEND_MESSAGE
-5.  READ_MESSAGE
-6.  CHAT
+3.  LIST_USERS  
+-- Messaging  
+4.  CHAT  
+5.  SEND_MESSAGE  
+6.  READ_MESSAGE  
 -- Room
 7.  CREATE_ROOM
 8.  LIST_ROOM
-9.  SEND_MESSAGE
-10. ENTER_ROOM
+9.  SEND_MESSAGE  
+10. ENTER_ROOM  
 
 
 ##### 1.4.3.5 Unique Id Service *[optional]*:
 This service is responsible for generating unique identifiers when requested. The returned identifiers will be used in the file names created by other services when requesting and responding to the service requests. ${UNIQUE_ID_SERVICE_DIRECTORY} is defined and any request in this directory will be responded with a unique number. This is to create a unique file name across the chat system.
 
-Note: Each service should make sure that they create a unique request file when accessing this service too. Ex: request_<service_id>_001, request_<service_id>_002.
+Note:   
+- Each service should make sure that they create a unique request file when accessing this service too. Ex: request_<service_id>_001, request_<service_id>_002.
+- If a sequence number is used, then the service should save its state when going for a temporary shut down, So it can recover its previous sequence number when it restarts.
 
-__List of Operations__
+__List of Operations__   
 1. REQUEST_ID
 
 ##### 1.4.3.6 Garbage Collector Service *[optional]*:
@@ -133,7 +135,7 @@ Since communication is happening via files, it is possible that we might end up 
 **< Service_name >:Timeout:Path**  
 Garbage collector will then look for all files in this path and if they exceed the timeout then this service will delete those files.
 
-__List of Operations__
+__List of Operations__  
 1. REGISTER_SERVICE
 
 ##### 1.4.3.7 Back Up Service *[optional]*:
@@ -141,5 +143,5 @@ This service give the backup feature to the chat system and can be used to backu
 ###### Example:
 **< Service_name >:BackupPeriod:< comma separated file list. >**
 
-__List of Operations__
-1. REGISTER_SERVICE
+__List of Operations__  
+1. REGISTER_SERVICE 
