@@ -40,6 +40,65 @@ function user_login
      done
 }
 
+#Params
+#Username to chat with
+#Message
+function send_message_to
+{
+
+   get_unique_id
+   local uniq_id=$?.chatsrv
+
+   cat >${MESSAGING_SERVICE_DIRECTORY}/request_${uniq_id} <<EOF
+${USER_NAME}
+${1}
+${2}
+EOF
+
+}
+
+function read_message_from
+{
+   count=1
+   while :
+   do
+      for file in `ls -tr1 ${MAIL_BOX_DIRECTORY}/${USER_NAME}/${1}_* 2>/dev/null`
+      do
+         cat $file | sed "s/^/$1:/"
+         cat $file | sed "s/^/$1:/" >> ${USER_NAME}_chatwith_${1}
+         rm -rf $file
+      done
+      count=$(expr ${count} + 1)
+      [[ ${count} -eq 3 ]] && break;
+   done
+}
+
+function chat
+{
+   printf "Enter User to chat with :"
+   read c_user
+
+   touch ${USER_NAME}_chatwith_${c_user}
+
+   echo "Type quit to end the chat session"
+   while :
+   do
+      printf "${USER_NAME} :"
+      read -t 10 _cw_txt
+      if [[ $? -ne 0 ]];then
+         read_message_from ${c_user}
+         continue
+      fi
+      [[ ${_cw_txt} = "quit" ]] && break
+      echo "${USER_NAME} : ${_cw_txt}" >> ${USER_NAME}_chatwith_${c_user}
+      send_message_to ${c_user} "${_cw_txt}"
+      read_message_from ${c_user}
+   done
+
+
+}
+
+
 function user_sign_up()
 {
  echo "Enter username and password"
