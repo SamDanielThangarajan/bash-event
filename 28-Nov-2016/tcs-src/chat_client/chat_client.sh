@@ -20,12 +20,13 @@ function user_login
      read ul_user_name
      echo "Pleass enter the password"
      read -s ul_password
-     get_unique_id 
+     get_unique_id
      uid=$?
      echo "AUTH_USER:$ul_user_name:$ul_password" >> $REGISTRY_SERVICE_DIRECTORY/request_$uid
      
      while true
      do
+         echo "Looking for user details in registry"
          if [[  -f $REGISTRY_SERVICE_DIRECTORY/reply_$uid ]]; then
               result=`cat $REGISTRY_SERVICE_DIRECTORY/reply_$uid`
               rm -rf $REGISTRY_SERVICE_DIRECTORY/reply_$uid
@@ -78,9 +79,28 @@ read option
 case $option in
 1)
    user_sign_up
+   user_login
   ;;
 2)
    user_login
+   response = $?
+   if [[ response -eq 0  ]]; then
+   echo "Select one of the below options to start chat service"
+   echo "1.CHAT"
+   echo "2.SEND_MESSAGE"
+   echo "3.READ_MESSAGE"
+   read chat_option
+   case $chat_option in
+   1)
+    chat
+    ;;
+   2)
+    send_message
+    ;;
+   3)
+    read_message
+    ;;
+   fi
   ;;
 *)
   echo "Please enter a valid option"
